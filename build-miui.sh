@@ -139,6 +139,7 @@ echo "Applying Droidspaces required kernel configs......."
     --enable CONFIG_KPROBES \
     --enable CONFIG_KPROBES_ON_FTRACE \
     --enable CONFIG_HAVE_KPROBES
+    --enable CONFIG_KALLSYMS_ALL
 
 echo "Resolving config dependencies......."
 make $MAKE_ARGS olddefconfig
