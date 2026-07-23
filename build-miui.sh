@@ -169,7 +169,7 @@ echo "Build for MIUI finished."
 
 cd anykernel 
 
-ZIP_FILENAME=Skernel(~nk)_$(date +'%Y%m%d_%H%M%S').zip
+ZIP_FILENAME=Skernelv1.zip
 
 zip -r9 $ZIP_FILENAME ./* -x .git .gitignore out/ ./*.zip
 
