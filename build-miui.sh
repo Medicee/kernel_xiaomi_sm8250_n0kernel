@@ -120,6 +120,11 @@ for patch_file in /tmp/droidspaces-patches/*.patch; do
     fi
 done
 
+# ---> ADD RESUKISU INTEGRATION HERE <---
+echo "Integrating ReSukiSU......"
+curl -LSs "https://raw.githubusercontent.com/ReSukiSU/ReSukiSU/main/kernel/setup.sh" | bash -
+
+
 make $MAKE_ARGS ${DEFCONFIG}
 
 echo "Applying Droidspaces required kernel configs......."
@@ -129,7 +134,11 @@ echo "Applying Droidspaces required kernel configs......."
     --enable CONFIG_UTS_NS \
     --enable CONFIG_SYSVIPC \
     --enable CONFIG_IPC_NS \
-    --enable CONFIG_DEVTMPFS
+    --enable CONFIG_DEVTMPFS \
+    --enable CONFIG_KSU \
+    --enable CONFIG_KPROBES \
+    --enable CONFIG_KPROBES_ON_FTRACE \
+    --enable CONFIG_HAVE_KPROBES
 
 echo "Resolving config dependencies......."
 make $MAKE_ARGS olddefconfig
