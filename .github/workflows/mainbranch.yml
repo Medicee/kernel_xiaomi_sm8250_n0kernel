@@ -1,4 +1,4 @@
-name: APT-n0kernel
+name: APT-n0kernel(staging-umi)
 
 on:
   workflow_dispatch:
