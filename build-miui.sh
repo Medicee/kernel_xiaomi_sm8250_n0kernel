@@ -127,7 +127,7 @@ curl -LSs "https://raw.githubusercontent.com/ReSukiSU/ReSukiSU/main/kernel/setup
 
 make $MAKE_ARGS ${DEFCONFIG}
 
-echo "Applying Droidspaces required kernel configs......."
+    echo "Applying Droidspaces required kernel configs......."
 ./scripts/config --file out/.config \
     --enable CONFIG_NAMESPACES \
     --enable CONFIG_PID_NS \
@@ -136,10 +136,10 @@ echo "Applying Droidspaces required kernel configs......."
     --enable CONFIG_IPC_NS \
     --enable CONFIG_DEVTMPFS \
     --enable CONFIG_KSU \
-    --enable CONFIG_FTRACE \
     --enable CONFIG_KPROBES \
-    --enable CONFIG_KPROBES_ON_FTRACE \
     --enable CONFIG_KALLSYMS_ALL \
+    --disable CONFIG_FTRACE \
+    --disable CONFIG_KPROBES_ON_FTRACE \
     --enable CONFIG_KSU_SUSFS \
     --enable CONFIG_KSU_SUSFS_SUS_PATH \
     --enable CONFIG_KSU_SUSFS_SUS_MOUNT \
