@@ -51,6 +51,6 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v6
       with:
-        name: Skernelv1_$(date +'%Y%m%d_%H%M%S')
+        name: Skernelv1
         path: ./*.zip
         if-no-files-found: error
