@@ -136,10 +136,19 @@ echo "Applying Droidspaces required kernel configs......."
     --enable CONFIG_IPC_NS \
     --enable CONFIG_DEVTMPFS \
     --enable CONFIG_KSU \
+    --enable CONFIG_FTRACE \
     --enable CONFIG_KPROBES \
     --enable CONFIG_KPROBES_ON_FTRACE \
-    --enable CONFIG_HAVE_KPROBES
-    --enable CONFIG_KALLSYMS_ALL
+    --enable CONFIG_KALLSYMS_ALL \
+    --enable CONFIG_KSU_SUSFS \
+    --enable CONFIG_KSU_SUSFS_SUS_PATH \
+    --enable CONFIG_KSU_SUSFS_SUS_MOUNT \
+    --enable CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT \
+    --enable CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT \
+    --enable CONFIG_KSU_SUSFS_TRY_UMOUNT \
+    --enable CONFIG_KSU_SUSFS_SPOOF_UNAME \
+    --enable CONFIG_KSU_SUSFS_ENABLE_LOG \
+    --enable CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS
 
 echo "Resolving config dependencies......."
 make $MAKE_ARGS olddefconfig
