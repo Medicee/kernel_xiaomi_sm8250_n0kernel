@@ -137,50 +137,7 @@ jobs:
           echo "Building for MIUI Display configuration....."
           dts_source=arch/arm64/boot/dts/vendor/qcom
           cp -a ${dts_source} .dts.bak
-
-    - name: Nomount Integration
-      run: |
-         DEFCONFIG="vendor/umi_defconfig"
-         MAIN_DEFCONFIG="arch/arm64/configs/${DEFCONFIG}"
-         KERNEL_VERSION=$(grep -m1 '^VERSION = ' Makefile | awk '{print $3}').$(grep -m1 '^PATCHLEVEL = ' Makefile | awk '{print $3}')
-
-         # Default exports
-         export NOMOUNT_PATCH="https://github.com/maxsteeel/nomount/raw/refs/heads/master/kernel/patches/nomount_${KERNEL_VERSION}_kernel_integration.patch"
-         export NOMOUNT_CODE="https://github.com/maxsteeel/nomount/raw/refs/heads/master/kernel/src/nomount.c"
-         export NOMOUNT_HEADER="https://github.com/maxsteeel/nomount/raw/refs/heads/master/kernel/src/nomount.h"
-
-         echo "-- Setting up nomount for kernel version [$KERNEL_VERSION] --"
-         echo "-- Target defconfig: [$MAIN_DEFCONFIG] --"
-
-         # Download nomount patch, code, and header
-         wget -qO- "$NOMOUNT_PATCH" | patch -s -p1 --fuzz=5 || { echo "-- Fatal: Failed to apply nomount patch!"; exit 1; }
-         wget -qO- "$NOMOUNT_CODE" > "${PWD}/fs/nomount.c" || { echo "-- Fatal: Failed to download nomount.c!"; exit 1; }
-         wget -qO- "$NOMOUNT_HEADER" > "${PWD}/fs/nomount.h" || { echo "-- Fatal: Failed to download nomount.h!"; exit 1; }
-
-         # Enable the necessary Nomount configs
-         echo "CONFIG_NOMOUNT=y" >> "$MAIN_DEFCONFIG"
-         echo "-- nomount config appended to $MAIN_DEFCONFIG --"
-
-    - name: Rekernel Integration
-      run: |
-         DEFCONFIG="vendor/umi_defconfig"
-         MAIN_DEFCONFIG="arch/arm64/configs/${DEFCONFIG}"
-
-         # Default exports
-         export REKERNEL_PATCH="https://github.com/JackA1ltman/NonGKI_Kernel_Build_2nd/raw/refs/heads/mainline/Patches/Rekernel/rekernel_patches.sh"
-         export REKERNEL_EXTRA="https://github.com/JackA1ltman/NonGKI_Kernel_Build_2nd/raw/refs/heads/mainline/Patches/Rekernel/rekernel_extra.patch"
-
-         echo "-- Setting up rekernel..."
-         echo "-- Target defconfig: [$MAIN_DEFCONFIG] --"
-
-         # Download rekernel patch and extra patch
-         wget -qO- "$REKERNEL_PATCH" | bash || { echo "-- Fatal: Failed to apply rekernel patch!"; exit 1; }
-         wget -qO- "$REKERNEL_EXTRA" | patch -s -p1 --fuzz=5 || { echo "-- Fatal: Failed to apply rekernel extra patch!"; exit 1; }
-
-         # Enable the necessary Rekernel configs
-         echo "CONFIG_REKERNEL=y" >> "$MAIN_DEFCONFIG"
-         echo "-- rekernel config appended to $MAIN_DEFCONFIG --"
-
+ 
     - name: SUSFS Integration
       run: |
          DEFCONFIG="vendor/umi_defconfig"
